@@ -1,0 +1,117 @@
+{
+  "cutoff": "2010-07-11",
+  "n_train": 25716,
+  "n_test": 10532,
+  "train_pos": 95,
+  "test_pos": 46,
+  "results": {
+    "LogReg (balanced) @0.5": {
+      "precision": 0.14883720930232558,
+      "recall": 0.6956521739130435,
+      "f1": 0.24521072796934865,
+      "f2": 0.40100250626566414,
+      "accuracy": 0.9812951006456514,
+      "tp": 32,
+      "fp": 183,
+      "fn": 14,
+      "tn": 10303,
+      "alerts": 215,
+      "pr_auc": 0.48087388445158114,
+      "roc_auc": 0.9101742281634312
+    },
+    "LogReg (no weights) @0.5": {
+      "precision": 0.8108108108108109,
+      "recall": 0.6521739130434783,
+      "f1": 0.7228915662650602,
+      "f2": 0.6787330316742082,
+      "accuracy": 0.9978161792631979,
+      "tp": 30,
+      "fp": 7,
+      "fn": 16,
+      "tn": 10479,
+      "alerts": 37,
+      "pr_auc": 0.7676293982331519,
+      "roc_auc": 0.9503209247941354
+    },
+    "SIEM rule": {
+      "precision": 0.3225806451612903,
+      "recall": 0.43478260869565216,
+      "f1": 0.37037037037037035,
+      "f2": 0.4065040650406504,
+      "accuracy": 0.9935434865172806,
+      "tp": 20,
+      "fp": 42,
+      "fn": 26,
+      "tn": 10444,
+      "alerts": 62
+    }
+  },
+  "business": {
+    "LogReg (balanced) @0.5": {
+      "analyst_hours": 71.66666666666667,
+      "alerts_per_day": 2.654320987654321,
+      "alerts_per_1000_users_per_day": 14.27054294437807,
+      "review_cost_usd": 3225.0,
+      "missed_insider_cost_usd": 106400.0,
+      "total_cost_usd": 109625.0
+    },
+    "LogReg (no weights) @0.5": {
+      "analyst_hours": 12.333333333333334,
+      "alerts_per_day": 0.4567901234567901,
+      "alerts_per_1000_users_per_day": 2.4558608787999465,
+      "review_cost_usd": 555.0,
+      "missed_insider_cost_usd": 121600.0,
+      "total_cost_usd": 122155.0
+    },
+    "SIEM rule": {
+      "analyst_hours": 20.666666666666668,
+      "alerts_per_day": 0.7654320987654321,
+      "alerts_per_1000_users_per_day": 4.11522633744856,
+      "review_cost_usd": 930.0,
+      "missed_insider_cost_usd": 197600.0,
+      "total_cost_usd": 198530.0
+    }
+  },
+  "cost_assumptions": {
+    "analyst_minutes_per_alert": 20.0,
+    "analyst_cost_per_hour": 45.0,
+    "cost_per_missed_malicious_day": 7600.0
+  },
+  "leakage_checks": [
+    {
+      "check": "Train strictly before test in time",
+      "result": "PASS",
+      "detail": "train ends 2010-07-10, test starts 2010-07-11"
+    },
+    {
+      "check": "No user-day in both train and test",
+      "result": "PASS",
+      "detail": "0 overlapping user-days"
+    },
+    {
+      "check": "No identifier / label columns among features",
+      "result": "PASS",
+      "detail": "forbidden present: none"
+    },
+    {
+      "check": "No single feature is a near-copy of the label",
+      "result": "PASS",
+      "detail": "max |corr(feature, label)| = 0.573"
+    },
+    {
+      "check": "Both splits contain malicious user-days",
+      "result": "PASS",
+      "detail": "train 95, test 46"
+    },
+    {
+      "check": "Scaler/imputer statistics fitted on TRAIN only",
+      "result": "PASS",
+      "detail": "StandardScaler.mean_ equals the training-set mean (test never seen by fit)"
+    },
+    {
+      "check": "Prefix invariance (features use past data only)",
+      "result": "PASS",
+      "detail": "25716 train rows recomputed from truncated logs; max abs difference = 0.00e+00"
+    }
+  ]
+}

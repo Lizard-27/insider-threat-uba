@@ -1,0 +1,15 @@
+# data is generated or downloaded, never committed (CERT r4.2 is ~16 GB)
+data/*
+!data/README.md
+
+# Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
