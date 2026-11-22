@@ -49,7 +49,7 @@ code(r"""
 # 0. Setup: works in Google Colab and locally
 import os, sys, subprocess
 
-REPO_URL = "https://github.com/YOUR-TEAM/insider-threat-uba.git"   # <-- set to your team's GitHub repo
+REPO_URL = "https://github.com/Lizard-27/insider-threat-uba.git"   # team GitHub repo
 
 if not os.path.isdir("src/uba"):
     if os.path.isdir("../src/uba"):
